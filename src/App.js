@@ -4,6 +4,8 @@ import ClassCounter from "./components/ClassCount";
 import "./styles/App.css";
 import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
+import MyButton from "./components/UI/MyButton";
+import MyInput from "./components/UI/MyInput";
 
 
 function App() {
@@ -13,16 +15,31 @@ function App() {
   { id: 2, title: "Javascript 2", body: "Description" },
   { id: 3, title: "Javascript 3", body: "Description" },
   ])  
+
+  const [title, setTitle] = useState("")
+
+  // 50 минута //
+
+  const addNewPost = (e) => {
+    e.preventDefault()
+    console.log(title)
+  }
   
     
   return (
     <div className="App">
       <form>
-        <input type="text" placeholder="Название поста">
-        </input>
-        <input type="text" placeholder="Описание поста">
-        </input>
-        <button>Создать пост</button>
+        {/* Управляемый компонент */}
+        <MyInput
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          type="text"
+          placeholder="Название поста">
+        </MyInput>
+
+        <MyInput type="text" placeholder="Описание поста">
+        </MyInput>
+        <MyButton onClick={addNewPost}>Создать пост</MyButton>
       </form>
       <PostList posts={posts} title="Посты про JS" />
       
