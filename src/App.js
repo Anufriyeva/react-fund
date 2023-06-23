@@ -7,6 +7,7 @@ import PostList from "./components/PostList";
 import MyButton from "./components/UI/MyButton";
 import MyInput from "./components/UI/MyInput";
 import PostForm from "./components/PostForm";
+import MySelect from "./components/UI/MySelect";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   { id: 3, title: "Javascript 3", body: "Description" },
   ])  
 
+  const [selectedSort, setSelectedSort] = useState('')
   
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -27,16 +29,29 @@ function App() {
     setPosts(posts.filter(p => p.id !== post.id))
 
   }
+
+  const sortPosts = (sort) => {
+    setSelectedSort(sort);
+    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])))
+  }
     
   return (
     <div className="App">
       <PostForm create={createPost} />
       <hr style={{margin: '15px 0'}}/>
       <div>
-        <select>
-          <option value='value1'>По названию</option> 
-          <option value='value1'>По описанию</option> 
-        </select>
+        {/* время видео 1-12 */}
+        <MySelect
+          value={selectedSort}
+          onChange={sortPosts}
+          defaultValue="Сортировка"
+          options={[
+            { value: 'title', name: 'По названию' },
+            { value: 'body', name: 'По описанию' },
+            
+          ]}
+        
+        />
       </div>
       {posts.length !== 0
         ? <PostList remove={removePost} posts={posts} title="Посты про JS" />
