@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Counter from "./components/Count";
 import ClassCounter from "./components/ClassCount";
 import "./styles/App.css";
@@ -17,12 +17,13 @@ function App() {
   ])  
 
   const [title, setTitle] = useState("")
-
-  // 50 минута //
+  const bodyInputRef = useRef();
+  
 
   const addNewPost = (e) => {
     e.preventDefault()
     console.log(title)
+    console.log(bodyInputRef.current.value)
   }
   
     
@@ -37,8 +38,14 @@ function App() {
           placeholder="Название поста">
         </MyInput>
 
-        <MyInput type="text" placeholder="Описание поста">
+
+        {/* Неуправляемый компонент */}
+        <MyInput
+          ref={bodyInputRef}
+          type="text"
+          placeholder="Описание поста">
         </MyInput>
+
         <MyButton onClick={addNewPost}>Создать пост</MyButton>
       </form>
       <PostList posts={posts} title="Посты про JS" />
