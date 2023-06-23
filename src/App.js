@@ -6,6 +6,7 @@ import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
 import MyButton from "./components/UI/MyButton";
 import MyInput from "./components/UI/MyInput";
+import PostForm from "./components/PostForm";
 
 
 function App() {
@@ -16,41 +17,33 @@ function App() {
   { id: 3, title: "Javascript 3", body: "Description" },
   ])  
 
-  const [post, setPost] = useState({title: '', body: ''})
   
-  
-
-  const addNewPost = (e) => {
-    e.preventDefault()
-    
-    setPosts([...posts, {...post, id: Date.now()}])
-    setPost({title: '', body: ''})
+  const createPost = (newPost) => {
+    setPosts([...posts, newPost])
   }
   
+  // Получаем post из дочернего компонента
+  const removePost = (post) => {
+    setPosts(posts.filter(p => p.id !== post.id))
+
+  }
     
   return (
     <div className="App">
-      <form>
-        {/* Управляемый компонент */}
-        <MyInput
-          value={post.title}
-          onChange={e => setPost({...post, title: e.target.value})}
-          type="text"
-          placeholder="Название поста">
-        </MyInput>
-
-
-        {/* Неуправляемый компонент */}
-        <MyInput
-          value={post.body}
-          onChange={e => setPost({...post, body: e.target.value})}         
-          type="text"
-          placeholder="Описание поста">
-        </MyInput>
-
-        <MyButton onClick={addNewPost}>Создать пост</MyButton>
-      </form>
-      <PostList posts={posts} title="Посты про JS" />
+      <PostForm create={createPost} />
+      <hr style={{margin: '15px 0'}}/>
+      <div>
+        <select>
+          <option value='value1'>По названию</option> 
+          <option value='value1'>По описанию</option> 
+        </select>
+      </div>
+      {posts.length !== 0
+        ? <PostList remove={removePost} posts={posts} title="Посты про JS" />
+        : <h1 style={{ textAlign: 'center' }}>
+          Посты не найдены
+        </h1>      
+      }     
       
     </div>
   );
