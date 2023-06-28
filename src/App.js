@@ -13,6 +13,8 @@ import MyModal from "./components/UI/MyModal";
 import { usePosts } from "./hooks/usePosts";
 import axios from "axios";
 import PostService from "./API/PostService";
+import Loader from "./components/UI/Loader";
+import { useFetching } from "./hooks/useFetching";
 
 
 function App() {
@@ -20,8 +22,17 @@ function App() {
   const [posts, setPosts] = useState([])  
   const [filter, setFilter] = useState({ sort: '', query: '' })  
   const [modal, setModal] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-  const [isPostsLoading, setIsPostsLoading] = useState(false);
+  
+  const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
+    const response = await PostService.getAll(limit, page);
+    setPosts(response.data)
+    console.log(response.headers['x-total-count']);
+    setTotalCount(response.headers['x-total-count'])
+  })
 
   useEffect(() => {
     fetchPosts()
@@ -35,15 +46,6 @@ function App() {
     setModal(false)
   }
 
-  async function fetchPosts() {
-    setIsPostsLoading(true);
-    setTimeout(async () => {
-      const posts = await PostService.getAll();
-      setPosts(posts)
-      setIsPostsLoading(false);
-    }, 1000)
-    
-  }
   
   // Получаем post из дочернего компонента
   const removePost = (post) => {
@@ -64,12 +66,15 @@ function App() {
       <hr style={{margin: '15px 0'}}/>
       <PostFilter
         filter={filter}
-        setFilter={setFilter}
-      
+        setFilter={setFilter}      
       />
 
+      {postError &&
+        <h1>Произошла ошибка ${postError}</h1>
+      }
+
       {isPostsLoading
-        ? <h1>Loading...</h1>
+        ? <div style={{display: "flex", justifyContent: "center", marginTop: 50}}><Loader/></div>
         : <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Посты про JS" />
       }     
        
