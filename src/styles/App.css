@@ -43,10 +43,12 @@
 .page__wrapper {
     display: flex;
     margin-top: 30px;
+    justify-content: center;
 }
 
 .page {
     padding: 10px;
+    margin: 5px;
     border: 1px solid teal;
     cursor: pointer;
 }
