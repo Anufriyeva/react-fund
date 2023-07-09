@@ -7,6 +7,7 @@ import Navbar from "./components/UI/Navbar";
 import Error from "./pages/Error";
 import AppRouter from "./components/AppRouter";
 import { AuthContext } from "./context";
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 function App() {

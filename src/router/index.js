@@ -4,12 +4,14 @@ import Posts from "../pages/Posts";
 import Error from "../pages/Error";
 import { Navigate } from "react-router-dom";
 import Login from "../pages/Login";
+import Bonus from "../pages/Bonus";
 
 export const privateRoutes = [
     { path: '/about', element: <About />, exact: true },
     { path: '/posts', element: <Posts />, exact: true },
+    { path: '/bonus', element: <Bonus />, exact: true },
     { path: '/posts/:id', element: <PostIdPage />, exact: true },
-    // { path: '/error', element: <Error />, exact: true },
+    { path: '/error', element: <Error />, exact: true },
     { path: '*', element: <Navigate to="/posts" replace={true} /> },
 ];
 

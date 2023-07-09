@@ -75,3 +75,18 @@
 .navbar__links {
     margin-left: auto;
 }
+
+.navbar__links a {
+    padding: 5px;
+        margin: 5px;
+        border: 1px solid teal;
+        cursor: pointer;
+        text-decoration: none;
+}
+
+.video-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
