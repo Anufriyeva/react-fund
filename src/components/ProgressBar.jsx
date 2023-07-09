@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-function CustomProgressBar() {
-  const now = 60;
-  return <ProgressBar now={now} label={`${now}%`} />;
+function CustomProgressBar({ addedItemsCount, max }) {
+  const completed = Math.min(addedItemsCount, max);
+
+  return (
+    <div>
+      <ProgressBar now={(completed / max) * 100} label={`${completed}/${max}`} />
+    </div>
+  );
 }
 
 export default CustomProgressBar;

@@ -1,14 +1,12 @@
 import React from 'react';
-import ProgressBar from '../components/ProgressBar';
+import ProductList from '../components/CardList';
 
 const Bonus = () => {
   return (
     <div>
-      <h1>Bonus page</h1>
-      <ProgressBar value={60} />
+      <ProductList />
     </div>
   );
-}
-
+};
 
 export default Bonus;

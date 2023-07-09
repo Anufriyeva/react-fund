@@ -90,3 +90,35 @@
     justify-content: center;
     align-items: center;
 }
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.product-list .product-card {
+    width: calc(33.33% - 20px);
+    /* Ширина каждой карточки товара (33.33% - отступы) */
+    margin: 10px;
+}
+
+.product-info {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.product-text {
+    text-align: left;
+    /* margin-bottom: 10px; */
+    margin-right: auto;
+}
+
+.progress-bar {
+    display: flex;
+    /* margin-left: auto; */
+    width: 50%;
+}
