@@ -12,7 +12,7 @@ export const privateRoutes = [
     { path: '/bonus', element: <Bonus />, exact: true },
     { path: '/posts/:id', element: <PostIdPage />, exact: true },
     { path: '/error', element: <Error />, exact: true },
-    { path: '*', element: <Navigate to="/posts" replace={true} /> },
+    { path: '*', element: <Navigate to="/about" replace={true} /> },
 ];
 
 export const publicRoutes = [

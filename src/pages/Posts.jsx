@@ -94,7 +94,7 @@ function Posts() {
       {postError &&
         <h1>Произошла ошибка ${postError}</h1>
       }
-      <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Посты про JS" />
+      <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Массив объектов. Infinite scroll" />
       <div ref={lastElement} style={{height: 10, background: 'gray'}}></div>
 
       {isPostsLoading &&
